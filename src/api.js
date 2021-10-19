@@ -47,6 +47,8 @@ class JoblyApi {
 
   // obviously, you'll add a lot here ...
 
+  // add the return output to the docstrings
+
   /** Get all companies from API. */
   static async getAllCompanies() {
     let res = await this.request(`companies/`);
@@ -55,7 +57,8 @@ class JoblyApi {
 
   /** Get all companies from API that match search term. */
   static async getFilteredCompanies(searchTerm) {
-    let res = await this.request(`companies?nameLike=${searchTerm}`);
+    // note need to pass in the second argument to let axios handle potential special characters
+    let res = await this.request(`companies/`, { nameLike: searchTerm });
     return res.companies;
   }
 
