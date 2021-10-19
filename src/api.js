@@ -38,7 +38,11 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle. 
+   * 
+   * Company is { handle, name, description, numEmployees, logoUrl, jobs }
+   *  where jobs is [{ id, title, salary, equity }, ...]
+  */
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
@@ -49,20 +53,29 @@ class JoblyApi {
 
   // add the return output to the docstrings
 
-  /** Get all companies from API. */
+  /** Get all companies from API. 
+   * 
+   * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
+  */
   static async getAllCompanies() {
     let res = await this.request(`companies/`);
     return res.companies;
   }
 
-  /** Get all companies from API that match search term. */
+  /** Get all companies from API that match search term. 
+   * 
+   * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
+  */
   static async getFilteredCompanies(searchTerm) {
     // note need to pass in the second argument to let axios handle potential special characters
     let res = await this.request(`companies/`, { nameLike: searchTerm });
     return res.companies;
   }
 
-  /** Get all jobs from API. */
+  /** Get all jobs from API. 
+   * 
+   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
+  */
   static async getAllJobs() {
     let res = await this.request(`jobs/`);
     return res.jobs;
