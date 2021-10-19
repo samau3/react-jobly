@@ -24,8 +24,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -46,4 +46,23 @@ class JoblyApi {
   }
 
   // obviously, you'll add a lot here ...
+
+  /** Get all companies from API. */
+  static async getAllCompanies() {
+    let res = await this.request(`companies/`);
+    return res.companies;
+  }
+
+  /** Get all companies from API that match search term. */
+  static async getFilteredCompanies(searchTerm) {
+    let res = await this.request(`companies?nameLike=${searchTerm}`);
+    return res.companies;
+  }
+
+  /** Get all jobs from API. */
+  static async getAllJobs() {
+    let res = await this.request(`jobs/`);
+    return res.jobs;
+  }
+
 }
