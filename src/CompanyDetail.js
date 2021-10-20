@@ -1,8 +1,12 @@
-// mock out a little more
-// import the necessary components and props
+import JobCardList from "./JobCardList";
+import JoblyApi from "./api";
+
 function CompanyDetail() {
     return (
-        <h1>Company Detail Component</h1>
+        <div> 
+            <h1>Company Detail Component</h1>
+            <JobCardList />
+        </div>
     );
 }
 

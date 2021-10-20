@@ -57,18 +57,18 @@ class JoblyApi {
    * 
    * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
   */
-  static async getAllCompanies() {
-    let res = await this.request(`companies/`);
-    return res.companies;
-  }
+  // static async getAllCompanies() {
+  //   let res = await this.request(`companies/`);
+  //   return res.companies;
+  // }
 
-  /** Get all companies from API that match search term. 
+  /** Get all companies from API or companies that match search term. 
    * 
    * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
   */
-  static async getFilteredCompanies(searchTerm) {
+  static async getAllCompanies(searchTerm) {
     // note need to pass in the second argument to let axios handle potential special characters
-    let res = await this.request(`companies/`, { nameLike: searchTerm });
+    let res = await this.request(`companies/`, { name: searchTerm });
     return res.companies;
   }
 
@@ -76,9 +76,20 @@ class JoblyApi {
    * 
    * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
   */
-  static async getAllJobs() {
-    let res = await this.request(`jobs/`);
+  // static async getAllJobs() {
+  //   let res = await this.request(`jobs/`);
+  //   return res.jobs;
+  // }
+
+   /** Get all jobs from API or jobs that match search term. 
+   * 
+   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
+  */
+  static async getAllJobs(searchTerm) {
+    let res = await this.request(`jobs/`, { title: searchTerm });
     return res.jobs;
   }
 
 }
+
+export default JoblyApi;
