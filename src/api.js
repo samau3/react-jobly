@@ -51,17 +51,6 @@ class JoblyApi {
 
   // obviously, you'll add a lot here ...
 
-  // add the return output to the docstrings
-
-  /** Get all companies from API. 
-   * 
-   * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
-  */
-  // static async getAllCompanies() {
-  //   let res = await this.request(`companies/`);
-  //   return res.companies;
-  // }
-
   /** Get all companies from API or companies that match search term. 
    * 
    * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
@@ -72,19 +61,11 @@ class JoblyApi {
     return res.companies;
   }
 
-  /** Get all jobs from API. 
-   * 
-   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
-  */
-  // static async getAllJobs() {
-  //   let res = await this.request(`jobs/`);
-  //   return res.jobs;
-  // }
 
-   /** Get all jobs from API or jobs that match search term. 
-   * 
-   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
-  */
+  /** Get all jobs from API or jobs that match search term. 
+  * 
+  * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
+ */
   static async getAllJobs(searchTerm) {
     let res = await this.request(`jobs/`, { title: searchTerm });
     return res.jobs;
