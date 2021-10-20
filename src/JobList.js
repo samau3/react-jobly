@@ -21,7 +21,7 @@ import JoblyApi from "./api"
 function JobList() {
     const [jobs, setJobs] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
-    console.log("CompanyList", { jobs, searchTerm });
+    console.log("JobList", { jobs, searchTerm });
 
     function handleSearch(formData) {
         setSearchTerm(formData);

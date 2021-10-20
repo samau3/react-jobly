@@ -24,7 +24,7 @@ function CompanyDetail() {
     console.log("CompanyDetail", { company, companyData });
 
     useEffect(function getCompanyFromApi() {
-        async function getCompanyData() {
+        async function getCompanyData() { //FIX ME - try / catch , add state for err?, break api call out
             setCompanyData(await JoblyApi.getCompany(company));
         }
         getCompanyData();

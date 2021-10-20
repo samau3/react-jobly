@@ -29,7 +29,7 @@ function CompanyList() {
     }
 
     useEffect(function getCompaniesFromApi() {
-        async function setCompaniesFromApi() {
+        async function setCompaniesFromApi() { //FIX ME  - variable, try catch, err state
             setCompanies(await JoblyApi.getAllCompanies(searchTerm));
         }
         setCompaniesFromApi();

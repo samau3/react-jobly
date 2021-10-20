@@ -19,8 +19,8 @@ function JoblyApp() {
     return (
         <div>
             <BrowserRouter>
-                <Navbar></Navbar>
-                <Routes></Routes>
+                <Navbar/>
+                <Routes/>
             </BrowserRouter>
         </div>
     );

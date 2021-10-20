@@ -53,9 +53,9 @@ class JoblyApi {
    * 
    * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 
   */
-  static async getAllCompanies(searchTerm) {
+  static async getAllCompanies(name) {
     // note need to pass in the second argument to let axios handle potential special characters
-    let res = await this.request(`companies/`, { name: searchTerm });
+    let res = await this.request(`companies/`, { name });
     return res.companies;
   }
 
@@ -64,8 +64,8 @@ class JoblyApi {
   * 
   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
  */
-  static async getAllJobs(searchTerm) {
-    let res = await this.request(`jobs/`, { title: searchTerm });
+  static async getAllJobs(title) {
+    let res = await this.request(`jobs/`, { title });
     return res.jobs;
   }
 

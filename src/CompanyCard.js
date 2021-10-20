@@ -20,7 +20,7 @@ function CompanyCard({ companyData }) {
         <div>
             <Link to={`/companies/${handle}`}>
                 <b>{name}</b>
-                <img src={logoUrl} alt={null} />
+                {logoUrl && <img src={logoUrl} alt={name} />}
                 <i>{description}</i>
             </Link>
         </div>
