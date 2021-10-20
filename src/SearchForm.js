@@ -19,7 +19,7 @@ function SearchForm({ handleSearch }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     console.log("SearchForm", { searchTerm, handleSearch });
-
+    
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
         setSearchTerm(evt.target.value);
@@ -29,10 +29,8 @@ function SearchForm({ handleSearch }) {
         *    & clear form. */
     function handleSubmit(evt) {
         evt.preventDefault();
-        (searchTerm.length === 0)
-            ? handleSearch(null)
-            : handleSearch(searchTerm);
-        setSearchTerm("");
+        const search = (searchTerm.length === 0) ? null : searchTerm;
+        handleSearch(search);
     }
 
     return (

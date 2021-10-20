@@ -11,7 +11,7 @@ function Routes() {
     return (
         <Switch>
             <Route exact path="/jobs"><JobList /></Route>
-            <Route exact path="/companies/:company"><CompanyDetail /></Route>
+            <Route exact path="/companies/:handle"><CompanyDetail /></Route>
             <Route exact path="/companies"><CompanyList /></Route>
             <Route exact path="/"><Homepage /></Route>
             <Redirect to="/" />

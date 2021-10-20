@@ -22,6 +22,7 @@ import JoblyApi from "./api"
 function CompanyList() {
     const [companies, setCompanies] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
+    const [err, setErr] = useState(null);
     console.log("CompanyList", { companies, searchTerm });
 
     function handleSearch(formData) {
@@ -29,11 +30,21 @@ function CompanyList() {
     }
 
     useEffect(function getCompaniesFromApi() {
-        async function setCompaniesFromApi() { //FIX ME  - variable, try catch, err state
-            setCompanies(await JoblyApi.getAllCompanies(searchTerm));
+        async function setCompaniesFromApi() { 
+            try {
+                const resp = await JoblyApi.getAllCompanies(searchTerm)
+                setCompanies(resp);
+            } catch(error) {
+                setErr(error);
+            }
+            
         }
         setCompaniesFromApi();
     }, [searchTerm]);
+
+    if (err){
+        return <i>Err {err[0]}</i>
+    }
 
     if (!companies) {
         return <div> Loading...</div>
@@ -43,7 +54,6 @@ function CompanyList() {
         <div>
             <h1>Companies</h1>
             <SearchForm handleSearch={handleSearch} />
-
             {companies.length === 0
                 ? <div>Sorry, no results were found</div>
                 : companies.map(company =>

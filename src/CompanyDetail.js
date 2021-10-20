@@ -19,16 +19,27 @@ import JoblyApi from "./api";
  * Routes -> CompanyDetail -> JobCardList
  */
 function CompanyDetail() {
-    const { company } = useParams();
+    const { handle } = useParams();
     const [companyData, setCompanyData] = useState(null);
-    console.log("CompanyDetail", { company, companyData });
+    const [err, setErr] = useState(null);
+    console.log("CompanyDetail", { handle, companyData });
 
     useEffect(function getCompanyFromApi() {
-        async function getCompanyData() { //FIX ME - try / catch , add state for err?, break api call out
-            setCompanyData(await JoblyApi.getCompany(company));
+        async function getCompanyData() { 
+            try {
+                const resp = await JoblyApi.getCompany(handle)
+                setCompanyData(resp);
+            } catch(error) {
+                console.log("catch err", err)
+                setErr(error);
+            }
         }
         getCompanyData();
-    }, []);
+    }, [handle, err]);
+
+    if (err){
+        return <i>Error: {err[0]}</i>
+    }
 
     if (!companyData) {
         return <div> Loading...</div>

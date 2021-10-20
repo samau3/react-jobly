@@ -21,6 +21,7 @@ import JoblyApi from "./api"
 function JobList() {
     const [jobs, setJobs] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
+    const [ err, setErr] = useState(null)
     console.log("JobList", { jobs, searchTerm });
 
     function handleSearch(formData) {
@@ -29,10 +30,19 @@ function JobList() {
 
     useEffect(function getJobsFromApi() {
         async function setJobsFromApi() {
-            setJobs(await JoblyApi.getAllJobs(searchTerm));
+            try{
+                const resp = await JoblyApi.getAllJobs(searchTerm);
+            setJobs(resp);
+            } catch(error){
+                setErr(error)
+            }   
         }
         setJobsFromApi();
     }, [searchTerm]);
+    
+    if (err){
+        return <i>Error: {err[0]}</i>
+    }
 
     if (!jobs) {
         return <div> Loading...</div>
