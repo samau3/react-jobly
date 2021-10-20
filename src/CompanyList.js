@@ -3,6 +3,22 @@ import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 import JoblyApi from "./api"
 
+
+/** Shows all companies
+ * 
+ * props:
+ * -none
+ * 
+ * states:
+ * - companies (either an array of found companies or null)
+ * - searchTerm (string or null)
+ * 
+ * events:
+ * -none
+ * 
+ *  Routes -> CompanyList -> {SearchForm, CompanyCard}
+ */
+
 function CompanyList() {
     const [companies, setCompanies] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);

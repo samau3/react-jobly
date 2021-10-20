@@ -4,9 +4,23 @@ import { useEffect, useState } from 'react';
 import JobCardList from "./JobCardList";
 import JoblyApi from "./api";
 
+
+/** Shows a specific company's information
+ * 
+ * props:
+ * - none
+ * 
+ * states:
+ * - companyData (null or an object of companyData)
+ * 
+ * events:
+ * - none
+ * 
+ * Routes -> CompanyDetail -> JobCardList
+ */
 function CompanyDetail() {
     const { company } = useParams();
-    const [companyData, setCompanyData] = useState([]);
+    const [companyData, setCompanyData] = useState(null);
     console.log("CompanyDetail", { company, companyData })
 
     useEffect(function getCompanyFromApi() {
@@ -16,7 +30,7 @@ function CompanyDetail() {
         getCompanyData()
     }, []);
 
-    if (companyData.length === 0) {
+    if (!companyData) {
         return <div> Loading...</div>
     }
 

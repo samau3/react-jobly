@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 
+/** A company's basic info 
+ * 
+ * props:
+ * - companyData
+ * 
+ * states:
+ * - none
+ * 
+ * events:
+ * - none
+ * 
+ * CompanyList -> CompanyCard
+ */
 function CompanyCard({ companyData }) {
-    console.log("CompanyCard")
+    console.log("CompanyCard", { companyData })
     const { handle, name, description, logoUrl } = companyData;
     return (
         <div>

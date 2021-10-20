@@ -1,6 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+/** Navigation Bar
+ * 
+ * props:
+ * - none
+ * 
+ * events:
+ * - none
+ * 
+ * state:
+ * - none
+ * 
+ * JoblyApp -> Navbar
+ */
 function Navbar() {
     return (
         <nav>

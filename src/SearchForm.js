@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 
+/** Form for searching either companies or jobs
+ * 
+ * props:
+ * - handleSearch (function)
+ * 
+ * states:
+ * - none
+ * 
+ * events:
+ * - handleChange
+ * - handleSubmit
+ * 
+ * { CompanyList, JobList } -> SearchForm
+ */
+
 function SearchForm({ handleSearch }) {
     const [formData, setFormData] = useState("");
 
