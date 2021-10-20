@@ -30,20 +30,20 @@ function CompanyList() {
     }
 
     useEffect(function getCompaniesFromApi() {
-        async function setCompaniesFromApi() { 
+        async function setCompaniesFromApi() {
             try {
                 const resp = await JoblyApi.getAllCompanies(searchTerm)
                 setCompanies(resp);
-            } catch(error) {
+            } catch (error) {
                 setErr(error);
             }
-            
+
         }
         setCompaniesFromApi();
     }, [searchTerm]);
 
-    if (err){
-        return <i>Err {err[0]}</i>
+    if (err) {
+        return <i>Error: Couldn't connect to database. Try again later.</i>
     }
 
     if (!companies) {
