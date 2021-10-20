@@ -53,13 +53,18 @@ function CompanyList() {
     return (
         <div>
             <h1>Companies</h1>
-            <SearchForm handleSearch={handleSearch} />
-            {companies.length === 0
-                ? <div>Sorry, no results were found</div>
-                : companies.map(company =>
-                    <CompanyCard
-                        key={company.handle}
-                        companyData={company} />)}
+            <div>
+                <SearchForm handleSearch={handleSearch} />
+            </div>
+            <div>
+                {companies.length === 0
+                    ? <div>Sorry, no results were found</div>
+                    : companies.map(company =>
+                        <CompanyCard
+                            key={company.handle}
+                            companyData={company} />)}
+            </div>
+
         </div>
     );
 }

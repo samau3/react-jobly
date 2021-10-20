@@ -1,4 +1,4 @@
-
+import "./JobCard.css";
 /** Renders single job information
  * 
  * props:
@@ -13,11 +13,12 @@
  * JobCardList -> JobCard
  */
 
-function JobCard({job}) {
-
+function JobCard({ job }) {
+    console.log("JobCard")
     return (
-        <div>
-            <h3>{job.title}</h3>
+        <div className="JobCard">
+            <h4>{job.title}</h4>
+            <p>{job.companyName}</p>
             {job.salary && <p>Salary: {job.salary}</p>}
             {job.equity && <p>Equity: {job.equity}</p>}
         </div>
