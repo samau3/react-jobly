@@ -49,8 +49,6 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
-
   /** Get all companies from API or companies that match search term. 
    * 
    * Returns [ { handle, name, description, numEmployees, logoUrl }, ...] 

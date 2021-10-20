@@ -1,5 +1,7 @@
 /**
  * Landing page for JoblyApp
+ * 
+ * Routes -> HomePage
  */
 function Homepage() {
     return (

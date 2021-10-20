@@ -5,6 +5,7 @@ import CompanyList from "./CompanyList";
 import JobList from "./JobList";
 import CompanyDetail from "./CompanyDetail";
 
+/** Routes for Jobs, Companies, Company, Homepage */
 
 function Routes() {
     return (

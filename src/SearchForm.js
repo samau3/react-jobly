@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-/** Form for searching either companies or jobs
+/** Form for searching 
  * 
  * props:
  * - handleSearch (function)
@@ -29,7 +29,6 @@ function SearchForm({ handleSearch }) {
         *    & clear form. */
     function handleSubmit(evt) {
         evt.preventDefault();
-        // handleSearch(formData)
         (formData.length === 0)
             ? handleSearch(null)
             : handleSearch(formData);

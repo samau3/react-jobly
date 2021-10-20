@@ -32,7 +32,7 @@ function CompanyList() {
         async function setCompaniesFromApi() {
             setCompanies(await JoblyApi.getAllCompanies(searchTerm));
         }
-        setCompaniesFromApi()
+        setCompaniesFromApi();
     }, [searchTerm]);
 
     if (!companies) {
@@ -41,7 +41,7 @@ function CompanyList() {
 
     return (
         <div>
-            <h1>Company List Component</h1>
+            <h1>Companies</h1>
             <SearchForm handleSearch={handleSearch} />
 
             {companies.length === 0

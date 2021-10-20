@@ -5,7 +5,7 @@ import JobCardList from "./JobCardList";
 import JoblyApi from "./api";
 
 
-/** Shows a specific company's information
+/** Renders a specific company's information and jobs
  * 
  * props:
  * - none
@@ -21,13 +21,13 @@ import JoblyApi from "./api";
 function CompanyDetail() {
     const { company } = useParams();
     const [companyData, setCompanyData] = useState(null);
-    console.log("CompanyDetail", { company, companyData })
+    console.log("CompanyDetail", { company, companyData });
 
     useEffect(function getCompanyFromApi() {
         async function getCompanyData() {
             setCompanyData(await JoblyApi.getCompany(company));
         }
-        getCompanyData()
+        getCompanyData();
     }, []);
 
     if (!companyData) {
@@ -38,8 +38,9 @@ function CompanyDetail() {
         <div>
             <h1>{companyData.name}</h1>
             <h3>{companyData.description}</h3>
-            <h6>{companyData.jobs[0].title}</h6>
-            <JobCardList />
+            {companyData.jobs.length === 0 
+            ? <div> No jobs listed </div>
+            : <JobCardList jobs={companyData.jobs}/>}
         </div>
     );
 }
