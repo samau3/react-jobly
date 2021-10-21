@@ -36,6 +36,43 @@ class JoblyApi {
     }
   }
 
+  // static async post(endpoint, data = {}, method = "post") {
+  //   console.debug("API Call:", endpoint, data, method);
+
+  //   const url = `${BASE_URL}/${endpoint}`;
+  //   const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+  //   const params = (method === "post")
+  //     ? data
+  //     : {};
+
+  //   try {
+  //     return (await axios({ url, method, data, params, headers })).data;
+  //   } catch (err) {
+  //     console.error("API Error:", err.response);
+  //     let message = err.response.data.error.message;
+  //     throw Array.isArray(message) ? message : [message];
+  //   }
+  // }
+
+  // static async patch(endpoint, data = {}, method = "patch") {
+  //   console.debug("API Call:", endpoint, data, method);
+
+  //   const url = `${BASE_URL}/${endpoint}`;
+  //   const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+  //   const params = (method === "patch")
+  //     ? data
+  //     : {};
+
+  //   try {
+  //     return (await axios({ url, method, data, params, headers })).data;
+  //   } catch (err) {
+  //     console.error("API Error:", err.response);
+  //     let message = err.response.data.error.message;
+  //     throw Array.isArray(message) ? message : [message];
+  //   }
+  // }
+
+
   // Individual API routes
 
   /** Get details on a company by handle. 
@@ -55,7 +92,7 @@ class JoblyApi {
   */
   static async getAllCompanies(name) {
     // note need to pass in the second argument to let axios handle potential special characters
-    let res = await this.request(`companies/`, { name });
+    let res = await this.request('companies/', { name });
     return res.companies;
   }
 
@@ -65,8 +102,35 @@ class JoblyApi {
   * Returns [ { id, title, salary, equity, companyHandle, companyName }, ...]
  */
   static async getAllJobs(title) {
-    let res = await this.request(`jobs/`, { title });
+    let res = await this.request('jobs/', { title });
     return res.jobs;
+  }
+
+  /** Register a user by submitting a POST request to API.
+  * 
+  * Returns { token }
+  */
+  static async getToken(username, password) {
+    let res = await this.request('auth/token', { username, password }, 'post');
+    return res.token;
+  }
+
+  /** Register a user by submitting a POST request to API.
+  * 
+  * Returns { token }
+  */
+  static async registerUser(user) {
+    let res = await this.request('auth/register', { user }, 'post');
+    return res.token;
+  }
+
+  /** Updates a user by submitting a PATCH request to API.
+  * 
+  * Returns { username, firstName, lastName, email, isAdmin }
+  */
+  static async editUser(user) {
+    let res = await this.request(`users/${user.username}`, { user }, 'patch');
+    return res; // note: need to break this down potentially when working on edit user
   }
 
 }
