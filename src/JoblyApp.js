@@ -28,7 +28,8 @@ function JoblyApp() {
         if (token) {
             async function fetchUser() {
                 try {
-                    const resp = await JoblyApi.getUser(token.userData);
+                    JoblyApi.token = token;
+                    const resp = await JoblyApi.getUser(token.userData.username);
                     setUser(resp);
                 } catch (error) {
                     setErr(error);
@@ -38,6 +39,8 @@ function JoblyApp() {
         }
     }, [token])
 
+    /** Login user via server authentication */
+    // change from effect style; just make loginUser as async
     function loginUser(userData) {
         async function authenticateFromApi() {
             try {
@@ -50,6 +53,8 @@ function JoblyApp() {
         authenticateFromApi();
     }
 
+    /** Register user via server authentication */
+    // change from effect style; just make loginUser as async
     function signupUser(userData) {
         async function registerToApi() {
             try {
@@ -62,6 +67,7 @@ function JoblyApp() {
         registerToApi();
     }
 
+    /** Edit user information via server authentication */
     function editUser(userData) {
         async function updateApi() {
             try {
@@ -74,6 +80,7 @@ function JoblyApp() {
         updateApi();
     }
 
+    /** Logout user by clearing token and user states */
     function logout() {
         console.log("Logout User");
         setToken(null);
@@ -85,6 +92,11 @@ function JoblyApp() {
         console.log(err);
     }
 
+    // is there a way to flash messages? 
+    // maybe use a state that timesout or use bootstrap
+
+    // move the errors state to be component specific
+    // simplifies app functions; moves the try/catch to the forms
     return (
         <div>
             <BrowserRouter>

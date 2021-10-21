@@ -17,6 +17,8 @@ class JoblyApi {
   // static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
   //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
   //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
+  // how would using localStorage affect the way token is stored?
   static token = null;
 
   static async request(endpoint, data = {}, method = "get") {
@@ -77,7 +79,6 @@ class JoblyApi {
   */
   static async getToken(user) {
     let res = await this.request('auth/token', user, 'post');
-    this.token = res.token;
     return res.token;
   }
 
@@ -87,7 +88,6 @@ class JoblyApi {
   */
   static async registerUser(user) {
     let res = await this.request('auth/register', user, 'post');
-    this.token = res.token;
     return res.token;
   }
 
@@ -97,16 +97,16 @@ class JoblyApi {
   */
   static async editUser(user) {
     let res = await this.request(`users/${user.username}`, user, 'patch');
-    return res; 
+    return res;
   }
 
   /** Gets user info by submitting a GET request to API.
   * 
   * Returns { username, firstName, lastName, email, isAdmin }
   */
-  static async getUser(user) {
-    let res = await this.request(`users/${user.username}`);
-    return res; 
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res;
   }
 
 }

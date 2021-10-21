@@ -15,6 +15,7 @@ function Routes({ loginUser, signupUser, editUser }) {
     const user = useContext(UserContext);
     console.log("Routes", { user })
 
+    // can return switch, then do user && routes
     if (!user) {
         return (
             <Switch>
@@ -36,6 +37,6 @@ function Routes({ loginUser, signupUser, editUser }) {
             <Redirect to="/" />
         </Switch>
     );
-} 
+}
 
 export default Routes;
