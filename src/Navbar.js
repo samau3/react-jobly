@@ -36,7 +36,7 @@ function Navbar({ logout }) {
             <NavLink exact to="/companies">Companies</NavLink>
             <NavLink exact to="/jobs">Jobs</NavLink>
             <NavLink exact to="/profile">Profile</NavLink>
-            <NavLink onClick={logout} exact to="/">Log Out</NavLink>
+            <NavLink onClick={logout} exact to="/">Log Out {user.username}</NavLink>
         </nav>
 
     );
