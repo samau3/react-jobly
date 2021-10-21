@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import UserContext from "./userContext";
 
 function Profile({ editUser }) {
-    const {username, firstName, lastName, email} = useContext(UserContext)
-    
+    const { username, firstName, lastName, email } = useContext(UserContext)
+    console.log("Profile", { username, firstName, lastName, email });
+
     const initialState = {
         username: username,
         password: "",

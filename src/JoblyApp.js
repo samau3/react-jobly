@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import UserContext from "./userContext";
 import Routes from "./Routes";
 import Navbar from "./Navbar";
@@ -22,15 +22,30 @@ function JoblyApp() {
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
     const [err, setErr] = useState(null)
-    console.log("Jobly App", {token, user})
+    console.log("Jobly App", { token, user })
+
+    useEffect(function changeUserState() {
+        if (token) {
+            async function fetchUser() {
+                try {
+                    const resp = await JoblyApi.getUser(user);
+                    setUser(resp);
+                } catch (error) {
+                    setErr(error);
+                }
+            }
+            fetchUser();
+        }
+    }, [token])
 
     function loginUser(userData) {
         async function authenticateFromApi() {
             try {
                 const token = await JoblyApi.getToken(userData);
                 setToken(token);
-                const resp = await JoblyApi.getUser(userData);
-                setUser(resp);
+                setUser(userData);
+                // const resp = await JoblyApi.getUser(userData);
+                // setUser(resp);
             } catch (error) {
                 setErr(error);
             }
@@ -43,8 +58,10 @@ function JoblyApp() {
             try {
                 const token = await JoblyApi.registerUser(userData);
                 setToken(token);
-                const resp = await JoblyApi.getUser(userData);
-                setUser(resp);
+                setUser(userData);
+
+                // const resp = await JoblyApi.getUser(userData);
+                // setUser(resp);
             } catch (error) {
                 setErr(error);
             }
@@ -64,11 +81,22 @@ function JoblyApp() {
         updateApi();
     }
 
+    function logout() {
+        console.log("Need to logout user");
+        setToken(null);
+        setUser(null);
+    }
+
+    // TODO: BETTER ERR HANDLING
+    if (err) {
+        console.log(err);
+    }
+
     return (
         <div>
             <BrowserRouter>
                 <UserContext.Provider value={user}>
-                    <Navbar />
+                    <Navbar logout={logout} />
                     <Routes loginUser={loginUser} signupUser={signupUser} editUser={editUser} />
                 </UserContext.Provider>
             </BrowserRouter>

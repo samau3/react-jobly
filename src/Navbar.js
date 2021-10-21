@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import UserContext from "./userContext";
 
 /** Navigation Bar for app
  * 
@@ -15,9 +16,12 @@ import "./Navbar.css";
  * 
  * JoblyApp -> Navbar
  */
-function Navbar() {
+function Navbar({ logout }) {
     // pass in Logout function from Jobly
-    if (!user){
+
+    const user = useContext(UserContext);
+
+    if (!user) {
         return (
             <nav className="nav" >
                 <NavLink exact to="/">Jobly</NavLink>
@@ -32,7 +36,7 @@ function Navbar() {
             <NavLink exact to="/companies">Companies</NavLink>
             <NavLink exact to="/jobs">Jobs</NavLink>
             <NavLink exact to="/profile">Profile</NavLink>
-            <NavLink exact to="/">Log Out</NavLink>
+            <NavLink onClick={logout} exact to="/">Log Out</NavLink>
         </nav>
 
     );
