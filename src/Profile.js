@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import UserContext from "./userContext";
 
 function Profile({ editUser }) {
-    const { username, firstName, lastName, email } = useContext(UserContext)
+    const { user } = useContext(UserContext)
+    const { username, firstName, lastName, email } = user
     console.log("Profile", { username, firstName, lastName, email });
 
     const initialState = {
@@ -18,8 +19,9 @@ function Profile({ editUser }) {
      *    & clear form. */
     function handleSubmit(evt) {
         evt.preventDefault();
+        delete formData.username;
         editUser(formData);
-        // setFormData(initialState);
+
     }
 
     /** Update local state w/curr state of input elem */
@@ -37,14 +39,16 @@ function Profile({ editUser }) {
             <input
                 id="username"
                 name="username"
-                value={username}
+                placeholder={username}
                 onChange={handleChange}
+                disabled
             />
             <label htmlFor="firstName">First Name:</label>
             <input
                 id="firstName"
                 name="firstName"
-                value={firstName}
+                placeholder={firstName}
+                value={formData.firstName}
                 onChange={handleChange}
             />
 
@@ -52,7 +56,8 @@ function Profile({ editUser }) {
             <input
                 id="lastName"
                 name="lastName"
-                value={lastName}
+                placeholder={lastName}
+                value={formData.lastName}
                 onChange={handleChange}
             />
 
@@ -61,7 +66,8 @@ function Profile({ editUser }) {
                 type="email"
                 id="email"
                 name="email"
-                value={email}
+                placeholder={email}
+                value={formData.email}
                 onChange={handleChange}
             />
 

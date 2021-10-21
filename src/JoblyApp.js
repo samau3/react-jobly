@@ -75,7 +75,7 @@ function JoblyApp() {
     }
 
     function logout() {
-        console.log("Need to logout user");
+        console.log("Logout User");
         setToken(null);
         setUser(null);
     }

@@ -20,13 +20,13 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
     const user = useContext(UserContext);
-
+    console.log("Homepage", { user })
     return (
         <>
             <h1>Jobly </h1>
             <h3>All jobs in one place.</h3>
-            { user
-                ? <h3>Welcome back {user.username}!</h3>
+            {user
+                ? <h3>Welcome back {user.user.username}!</h3>
                 : <> <button><Link to="/signup">Signup</Link></button>
                     <button><Link to="/login">Log in</Link></button></>
             }
