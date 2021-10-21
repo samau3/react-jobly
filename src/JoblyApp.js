@@ -28,7 +28,7 @@ function JoblyApp() {
         if (token) {
             async function fetchUser() {
                 try {
-                    const resp = await JoblyApi.getUser(user);
+                    const resp = await JoblyApi.getUser(token.userData);
                     setUser(resp);
                 } catch (error) {
                     setErr(error);
@@ -42,10 +42,7 @@ function JoblyApp() {
         async function authenticateFromApi() {
             try {
                 const token = await JoblyApi.getToken(userData);
-                setToken(token);
-                setUser(userData);
-                // const resp = await JoblyApi.getUser(userData);
-                // setUser(resp);
+                setToken({ token, userData });
             } catch (error) {
                 setErr(error);
             }
@@ -57,11 +54,7 @@ function JoblyApp() {
         async function registerToApi() {
             try {
                 const token = await JoblyApi.registerUser(userData);
-                setToken(token);
-                setUser(userData);
-
-                // const resp = await JoblyApi.getUser(userData);
-                // setUser(resp);
+                setToken({ token, userData });
             } catch (error) {
                 setErr(error);
             }
@@ -98,6 +91,7 @@ function JoblyApp() {
                 <UserContext.Provider value={user}>
                     <Navbar logout={logout} />
                     <Routes loginUser={loginUser} signupUser={signupUser} editUser={editUser} />
+                    {err && <b>{err[0]}</b>}
                 </UserContext.Provider>
             </BrowserRouter>
         </div>

@@ -1,5 +1,19 @@
 import React, { useState } from "react";
 
+/** Form to log in user
+ * 
+ * props: 
+ *  - loginUser function
+ * 
+ * state: 
+ * - formData
+ * 
+ * events:
+ * - onSubmit
+ * 
+ * Routes -> LoginForm
+ */
+
 function LoginForm({ loginUser }) {
     const initialState = { username: "", password: "" };
     const [formData, setFormData] = useState(initialState);
@@ -9,7 +23,6 @@ function LoginForm({ loginUser }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         loginUser(formData);
-        // setFormData(initialState);
     }
 
     /** Update local state w/curr state of input elem */
