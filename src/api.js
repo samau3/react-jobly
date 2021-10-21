@@ -71,7 +71,7 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** Register a user by submitting a POST request to API.
+  /** Authenticate user by submitting a POST request to API.
   * 
   * Returns { token }
   */
@@ -97,12 +97,16 @@ class JoblyApi {
   */
   static async editUser(user) {
     let res = await this.request(`users/${user.username}`, user, 'patch');
-    return res; // note: need to break this down potentially when working on edit user
+    return res; 
   }
 
+  /** Gets user info by submitting a GET request to API.
+  * 
+  * Returns { username, firstName, lastName, email, isAdmin }
+  */
   static async getUser(user) {
     let res = await this.request(`users/${user.username}`);
-    return res; // note: need to break this down potentially when working on edit user
+    return res; 
   }
 
 }

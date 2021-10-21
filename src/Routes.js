@@ -9,14 +9,11 @@ import SignupForm from "./SignupForm";
 import Profile from "./Profile";
 import UserContext from "./userContext";
 
-/** Routes for Jobs, Companies, Company, Homepage */
+/** Routes for Jobs, Companies, Company, Homepage, SignupForm, Profile, LoginForm */
 
 function Routes({ loginUser, signupUser, editUser }) {
     const user = useContext(UserContext);
     console.log("Routes", { user })
-    // maybe a ternary/if conditions for logged in vs not logged routes
-    // leave the redirect to "/" outside of the conditonal logic to enable
-    //      global redirect situations
 
     if (!user) {
         return (
@@ -39,6 +36,6 @@ function Routes({ loginUser, signupUser, editUser }) {
             <Redirect to="/" />
         </Switch>
     );
-} // Fix me above
+} 
 
 export default Routes;
