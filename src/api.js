@@ -36,42 +36,6 @@ class JoblyApi {
     }
   }
 
-  // static async post(endpoint, data = {}, method = "post") {
-  //   console.debug("API Call:", endpoint, data, method);
-
-  //   const url = `${BASE_URL}/${endpoint}`;
-  //   const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-  //   const params = (method === "post")
-  //     ? data
-  //     : {};
-
-  //   try {
-  //     return (await axios({ url, method, data, params, headers })).data;
-  //   } catch (err) {
-  //     console.error("API Error:", err.response);
-  //     let message = err.response.data.error.message;
-  //     throw Array.isArray(message) ? message : [message];
-  //   }
-  // }
-
-  // static async patch(endpoint, data = {}, method = "patch") {
-  //   console.debug("API Call:", endpoint, data, method);
-
-  //   const url = `${BASE_URL}/${endpoint}`;
-  //   const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-  //   const params = (method === "patch")
-  //     ? data
-  //     : {};
-
-  //   try {
-  //     return (await axios({ url, method, data, params, headers })).data;
-  //   } catch (err) {
-  //     console.error("API Error:", err.response);
-  //     let message = err.response.data.error.message;
-  //     throw Array.isArray(message) ? message : [message];
-  //   }
-  // }
-
 
   // Individual API routes
 
@@ -110,8 +74,9 @@ class JoblyApi {
   * 
   * Returns { token }
   */
-  static async getToken(username, password) {
-    let res = await this.request('auth/token', { username, password }, 'post');
+  static async getToken(user) {
+    let res = await this.request('auth/token', user, 'post');
+    this.token = res.token;
     return res.token;
   }
 
@@ -120,7 +85,8 @@ class JoblyApi {
   * Returns { token }
   */
   static async registerUser(user) {
-    let res = await this.request('auth/register', { user }, 'post');
+    let res = await this.request('auth/register', user, 'post');
+    this.token = res.token;
     return res.token;
   }
 
@@ -129,7 +95,12 @@ class JoblyApi {
   * Returns { username, firstName, lastName, email, isAdmin }
   */
   static async editUser(user) {
-    let res = await this.request(`users/${user.username}`, { user }, 'patch');
+    let res = await this.request(`users/${user.username}`, user, 'patch');
+    return res; // note: need to break this down potentially when working on edit user
+  }
+
+  static async getUser(user) {
+    let res = await this.request(`users/${user.username}`);
     return res; // note: need to break this down potentially when working on edit user
   }
 

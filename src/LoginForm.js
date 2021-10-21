@@ -9,7 +9,7 @@ function LoginForm({ loginUser }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         loginUser(formData);
-        setFormData(initialState);
+        // setFormData(initialState);
     }
 
     /** Update local state w/curr state of input elem */
@@ -20,8 +20,6 @@ function LoginForm({ loginUser }) {
             [name]: value,
         }));
     }
-
-
 
     return (
         <form onSubmit={handleSubmit}>
