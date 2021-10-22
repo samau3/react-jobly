@@ -18,8 +18,6 @@ import { Link } from "react-router-dom";
  * Routes -> HomePage
  */
 
-// does Link not need an exact attribute? - Links don't need exact, but NavLinks do
-// Link just acts as an interrupt
 function Homepage() {
     const user = useContext(UserContext);
     console.log("Homepage", { user })

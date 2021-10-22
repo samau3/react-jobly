@@ -14,11 +14,13 @@ import React, { useState } from "react";
  * Routes -> signupForm
  */
 function SignupForm({ signupUser }) {
-    const initialState = { username: "", 
-                        password: "" , 
-                        firstName: "", 
-                        lastName: "", 
-                        email: ""};
+    const initialState = {
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: ""
+    };
     const [formData, setFormData] = useState(initialState);
 
     /** Send {name, quantity} to parent

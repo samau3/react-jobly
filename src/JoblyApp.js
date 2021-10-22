@@ -25,11 +25,15 @@ function JoblyApp() {
     console.log("Jobly App", { token, user })
 
     useEffect(function changeUserState() {
+        // console.log("changeUserState", { token, user })
         if (token) {
             async function fetchUser() {
                 try {
-                    JoblyApi.token = token;
+                    // console.log("fetchUser try", token.userData.username)
+                    JoblyApi.token = token.token;
+                    // console.log("JoblyApi.token", JoblyApi.token)
                     const resp = await JoblyApi.getUser(token.userData.username);
+                    // console.log("fetchUser resp", { resp })
                     setUser(resp);
                 } catch (error) {
                     setErr(error);
