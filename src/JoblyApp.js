@@ -69,17 +69,12 @@ function JoblyApp() {
         setToken(null);
         setUser(null);
     }
-
-    // TODO: BETTER ERR HANDLING
     if (err) {
         console.log("JoblyApp error", err);
     }
 
     // is there a way to flash messages? 
     // maybe use a state that timesout or use bootstrap
-
-    // move the errors state to be component specific
-    // simplifies app functions; moves the try/catch to the forms
     return (
         <div>
             <BrowserRouter>
