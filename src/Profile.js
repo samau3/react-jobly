@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import UserContext from "./userContext";
+import "./Profile.css"
 
 /** Allows a user to edit their name and email on their profile
  * 
@@ -56,7 +57,7 @@ function Profile({ editUser }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="Profile">
             <label htmlFor="username">Username:</label>
             <input
                 id="username"

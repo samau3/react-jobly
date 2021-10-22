@@ -19,8 +19,8 @@ function JobCard({ job }) {
         <div className="JobCard">
             <h4>{job.title}</h4>
             <p>{job.companyName}</p>
-            {job.salary && <p>Salary: {job.salary}</p>}
-            {job.equity && <p>Equity: {job.equity.slice(job.equity.length-2)}%</p>}
+            {job.salary && <p>Salary: ${job.salary}</p>}
+            {job.equity && <p>Equity: {(job.equity * 100).toFixed(2)}%</p>}
         </div>
     );
 }

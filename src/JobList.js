@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import JobCardList from "./JobCardList";
-import JoblyApi from "./api"
+import JoblyApi from "./api";
+import "./JobList.css";
 
 /** Shows all jobs
  * 
@@ -49,7 +50,7 @@ function JobList() {
     }
 
     return (
-        <div>
+        <div className="JobList">
             <h1>Jobs</h1>
             <SearchForm handleSearch={handleSearch}/>
             {jobs.length === 0
