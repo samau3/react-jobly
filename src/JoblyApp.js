@@ -4,6 +4,7 @@ import Routes from "./Routes";
 import Navbar from "./Navbar";
 import { BrowserRouter } from "react-router-dom";
 import JoblyApi from "./api";
+import jwt from "jsonwebtoken";
 
 /** Overarching component for Jobly
  * 
@@ -21,6 +22,7 @@ import JoblyApi from "./api";
 function JoblyApp() {
     const [token, setToken] = useState((localStorage.getItem("token") || null));
     const [user, setUser] = useState(null);
+    // could make new state or merge state for loading with user
     const [err, setErr] = useState(null)
     console.log("Jobly App", { token, user })
 
@@ -31,7 +33,10 @@ function JoblyApp() {
                     JoblyApi.token = token;
                     // could we possible decode token to get username info without having it 
                     // stored in localStorage to begin with?
-                    const resp = await JoblyApi.getUser(localStorage.getItem("username"));
+                    // - yes, use JWT
+                    // console.log("inside fetchUser", { token, jwt })
+                    // console.log("decoding token", jwt.decode(token))
+                    const resp = await JoblyApi.getUser(jwt.decode(token).username);
                     setUser(resp);
                 } catch (error) {
                     setErr(error);
@@ -49,7 +54,7 @@ function JoblyApp() {
         localStorage.setItem("token", token);
         // is there a better way to handle accessing username on refresh than storing
         // it directly in localStorage?
-        localStorage.setItem("username", userData.username);
+        // localStorage.setItem("username", userData.username);
         setToken(token);
     }
 
@@ -58,7 +63,7 @@ function JoblyApp() {
     async function signupUser(userData) {
         const token = await JoblyApi.registerUser(userData);
         localStorage.setItem("token", token)
-        localStorage.setItem("username", userData.username);
+        // localStorage.setItem("username", userData.username);
         setToken(token);
     }
 
@@ -79,6 +84,7 @@ function JoblyApp() {
         console.log("JoblyApp error", err);
     }
 
+    // could change to be a state - to see if currentUser is loaded
     if (localStorage.getItem("token") && !user) {
         return <i>Loading...</i>
     }

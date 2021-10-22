@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "./userContext";
 
+// docstring please
 function Profile({ editUser }) {
     const { user } = useContext(UserContext)
     const { username, firstName, lastName, email } = user
