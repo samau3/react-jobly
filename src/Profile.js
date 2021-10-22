@@ -1,10 +1,24 @@
 import React, { useState, useContext } from "react";
 import UserContext from "./userContext";
 
-// docstring please
+/** Allows a user to edit their name and email on their profile
+ * 
+ * props:
+ * - editUser (fn)
+ * 
+ * state:
+ * - none
+ * 
+ * events:
+ * - handleSubmit
+ * - handleChange
+ * 
+ * Routes -> Profile
+ */
 function Profile({ editUser }) {
-    const { user } = useContext(UserContext)
-    const { username, firstName, lastName, email } = user
+    const { user } = useContext(UserContext);
+    const [submitted, setSubmitted] = useState(false);
+    const { username, firstName, lastName, email } = user;
     console.log("Profile", { username, firstName, lastName, email });
 
     const initialState = {
@@ -15,7 +29,7 @@ function Profile({ editUser }) {
         email: email
     };
     const [formData, setFormData] = useState(initialState);
-    const [err, setErr] = useState(null)
+    const [err, setErr] = useState(null);
 
 
     /** Send {name, quantity} to parent
@@ -25,6 +39,7 @@ function Profile({ editUser }) {
         try {
             delete formData.username;
             await editUser(formData, username);
+            setSubmitted(true);
         } catch (error) {
             setErr(error);
         }
@@ -88,6 +103,7 @@ function Profile({ editUser }) {
 
             <button>Save Changes</button>
             {err && <b>{err[0]}</b>}
+            {submitted && <b>Updated successfully.</b>}
         </form>
     )
 }

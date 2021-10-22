@@ -31,11 +31,6 @@ function JoblyApp() {
             async function fetchUser() {
                 try {
                     JoblyApi.token = token;
-                    // could we possible decode token to get username info without having it 
-                    // stored in localStorage to begin with?
-                    // - yes, use JWT
-                    // console.log("inside fetchUser", { token, jwt })
-                    // console.log("decoding token", jwt.decode(token))
                     const resp = await JoblyApi.getUser(jwt.decode(token).username);
                     setUser(resp);
                 } catch (error) {
@@ -52,18 +47,13 @@ function JoblyApp() {
     async function loginUser(userData) {
         const token = await JoblyApi.getToken(userData);
         localStorage.setItem("token", token);
-        // is there a better way to handle accessing username on refresh than storing
-        // it directly in localStorage?
-        // localStorage.setItem("username", userData.username);
         setToken(token);
     }
 
     /** Register user via server authentication */
-    // change from effect style; just make loginUser as async
     async function signupUser(userData) {
         const token = await JoblyApi.registerUser(userData);
         localStorage.setItem("token", token)
-        // localStorage.setItem("username", userData.username);
         setToken(token);
     }
 
@@ -85,6 +75,7 @@ function JoblyApp() {
     }
 
     // could change to be a state - to see if currentUser is loaded
+    // as is will be an issue for scalability 
     if (localStorage.getItem("token") && !user) {
         return <i>Loading...</i>
     }
