@@ -23,7 +23,7 @@ function Profile({ editUser }) {
         evt.preventDefault();
         try {
             delete formData.username;
-            await editUser(formData);
+            await editUser(formData, username);
         } catch (error) {
             setErr(error);
         }
@@ -46,7 +46,6 @@ function Profile({ editUser }) {
                 id="username"
                 name="username"
                 placeholder={username}
-                onChange={handleChange}
                 disabled
             />
             <label htmlFor="firstName">First Name:</label>

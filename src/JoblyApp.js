@@ -28,10 +28,11 @@ function JoblyApp() {
         if (token) {
             async function fetchUser() {
                 try {
-                    JoblyApi.token = token.token;
-                    const resp = await JoblyApi.getUser(token.userData.username);
+                    JoblyApi.token = token;
+                    // could we possible decode token to get username info without having it 
+                    // stored in localStorage to begin with?
+                    const resp = await JoblyApi.getUser(localStorage.getItem("username"));
                     setUser(resp);
-                    return <i>Loading...</i>
                 } catch (error) {
                     setErr(error);
                 }
@@ -42,11 +43,14 @@ function JoblyApp() {
 
 
     /** Login user via server authentication */
-    // change from effect style; just make loginUser as async
+
     async function loginUser(userData) {
         const token = await JoblyApi.getToken(userData);
-        localStorage.setItem("token", token)
-        setToken({ token, userData });
+        localStorage.setItem("token", token);
+        // is there a better way to handle accessing username on refresh than storing
+        // it directly in localStorage?
+        localStorage.setItem("username", userData.username);
+        setToken(token);
     }
 
     /** Register user via server authentication */
@@ -54,12 +58,13 @@ function JoblyApp() {
     async function signupUser(userData) {
         const token = await JoblyApi.registerUser(userData);
         localStorage.setItem("token", token)
-        setToken({ token, userData });
+        localStorage.setItem("username", userData.username);
+        setToken(token);
     }
 
     /** Edit user information via server authentication */
-    async function editUser(userData) {
-        const resp = await JoblyApi.editUser(userData);
+    async function editUser(userData, username) {
+        const resp = await JoblyApi.editUser(userData, username);
         setUser(resp);
     }
 
@@ -72,6 +77,10 @@ function JoblyApp() {
     }
     if (err) {
         console.log("JoblyApp error", err);
+    }
+
+    if (localStorage.getItem("token") && !user) {
+        return <i>Loading...</i>
     }
 
     return (

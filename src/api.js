@@ -95,8 +95,9 @@ class JoblyApi {
   * 
   * Returns { username, firstName, lastName, email, isAdmin }
   */
-  static async editUser(user) {
-    let res = await this.request(`users/${user.username}`, user, 'patch');
+  static async editUser(user, username) {
+    console.log("editUser", { user })
+    let res = await this.request(`users/${username}`, user, 'patch');
     return res;
   }
 

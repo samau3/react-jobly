@@ -13,8 +13,7 @@ import UserContext from "./userContext";
 
 function Routes({ loginUser, signupUser, editUser }) {
     const user = useContext(UserContext);
-    console.log("Routes", { user })
-    const token = localStorage.getItem('token')
+    console.log("Routes", { user });
 
     return (
         <>

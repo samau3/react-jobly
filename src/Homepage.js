@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 function Homepage() {
     const user = useContext(UserContext);
     console.log("Homepage", { user })
-    const token = localStorage.getItem('token');
+
     return (
         <>
             <h1>Jobly </h1>

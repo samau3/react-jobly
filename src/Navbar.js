@@ -20,17 +20,9 @@ function Navbar({ logout }) {
     // pass in Logout function from Jobly
 
     const user = useContext(UserContext);
-    const token = localStorage.getItem('token');
-
-    // if (!user) {
-    //     return (
-    //         <nav className="nav" >
-    //             <NavLink exact to="/">Jobly</NavLink>
-    //             <NavLink exact to="/signup">Signup</NavLink>
-    //             <NavLink exact to="/login">Log in</NavLink>
-    //         </nav>
-    //     );
-    // }
+    console.log("Navbar", { user })
+    // console.log("Navbar user.user", user.user)
+    // const { username } = user.user;
     return (
         <>
             {user &&
