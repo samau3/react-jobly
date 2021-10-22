@@ -14,13 +14,19 @@ function Profile({ editUser }) {
         email: email
     };
     const [formData, setFormData] = useState(initialState);
+    const [err, setErr] = useState(null)
+
 
     /** Send {name, quantity} to parent
      *    & clear form. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        delete formData.username;
-        editUser(formData);
+        try {
+            delete formData.username;
+            await editUser(formData);
+        } catch (error) {
+            setErr(error);
+        }
 
     }
 
@@ -81,6 +87,7 @@ function Profile({ editUser }) {
             />
 
             <button>Save Changes</button>
+            {err && <b>{err[0]}</b>}
         </form>
     )
 }

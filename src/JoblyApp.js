@@ -45,43 +45,22 @@ function JoblyApp() {
 
     /** Login user via server authentication */
     // change from effect style; just make loginUser as async
-    function loginUser(userData) {
-        async function authenticateFromApi() {
-            try {
-                const token = await JoblyApi.getToken(userData);
-                setToken({ token, userData });
-            } catch (error) {
-                setErr(error);
-            }
-        }
-        authenticateFromApi();
+    async function loginUser(userData) {
+        const token = await JoblyApi.getToken(userData);
+        setToken({ token, userData });
     }
 
     /** Register user via server authentication */
     // change from effect style; just make loginUser as async
-    function signupUser(userData) {
-        async function registerToApi() {
-            try {
-                const token = await JoblyApi.registerUser(userData);
-                setToken({ token, userData });
-            } catch (error) {
-                setErr(error);
-            }
-        }
-        registerToApi();
+    async function signupUser(userData) {
+        const token = await JoblyApi.registerUser(userData);
+        setToken({ token, userData });
     }
 
     /** Edit user information via server authentication */
-    function editUser(userData) {
-        async function updateApi() {
-            try {
-                const resp = await JoblyApi.editUser(userData);
-                setUser(resp);
-            } catch (error) {
-                setErr(error);
-            }
-        }
-        updateApi();
+    async function editUser(userData) {
+        const resp = await JoblyApi.editUser(userData);
+        setUser(resp);
     }
 
     /** Logout user by clearing token and user states */
@@ -93,7 +72,7 @@ function JoblyApp() {
 
     // TODO: BETTER ERR HANDLING
     if (err) {
-        console.log(err);
+        console.log("JoblyApp error", err);
     }
 
     // is there a way to flash messages? 

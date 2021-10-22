@@ -31,6 +31,40 @@ function Navbar({ logout }) {
         );
     }
     return (
+        <>
+            {user &&
+                <nav className="nav" >
+                    <NavLink exact to="/">Jobly</NavLink>
+                    <NavLink exact to="/companies">Companies</NavLink>
+                    <NavLink exact to="/jobs">Jobs</NavLink>
+                    <NavLink exact to="/profile">Profile</NavLink>
+                    <NavLink onClick={logout} exact to="/">Log Out {user.user.username}</NavLink>
+                </nav>
+            }
+            {!user &&
+                <nav className="nav" >
+                    <NavLink exact to="/">Jobly</NavLink>
+                    <NavLink exact to="/signup">Signup</NavLink>
+                    <NavLink exact to="/login">Log in</NavLink>
+                </nav>
+            }
+        </>
+    );
+}
+
+export default Navbar;
+
+/*
+    if (!user) {
+        return (
+            <nav className="nav" >
+                <NavLink exact to="/">Jobly</NavLink>
+                <NavLink exact to="/signup">Signup</NavLink>
+                <NavLink exact to="/login">Log in</NavLink>
+            </nav>
+        );
+    }
+    return (
         <nav className="nav" >
             <NavLink exact to="/">Jobly</NavLink>
             <NavLink exact to="/companies">Companies</NavLink>
@@ -40,6 +74,4 @@ function Navbar({ logout }) {
         </nav>
 
     );
-}
-
-export default Navbar;
+*/

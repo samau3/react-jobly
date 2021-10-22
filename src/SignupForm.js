@@ -22,12 +22,18 @@ function SignupForm({ signupUser }) {
         email: ""
     };
     const [formData, setFormData] = useState(initialState);
+    const [err, setErr] = useState(null)
 
     /** Send {name, quantity} to parent
      *    & clear form. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        signupUser(formData);
+        try {
+            await signupUser(formData);
+        } catch (error) {
+            console.log("Signup Form Err", error);
+            setErr(error);
+        }
     }
 
     /** Update local state w/curr state of input elem */
@@ -83,6 +89,8 @@ function SignupForm({ signupUser }) {
                 onChange={handleChange}
             />
             <button>Sign up</button>
+
+            {err && <b>{err[0]}</b>}
         </form>
     )
 }

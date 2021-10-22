@@ -17,12 +17,18 @@ import React, { useState } from "react";
 function LoginForm({ loginUser }) {
     const initialState = { username: "", password: "" };
     const [formData, setFormData] = useState(initialState);
+    const [err, setErr] = useState(null)
 
     /** Send {name, quantity} to parent
      *    & clear form. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        loginUser(formData);
+        try {
+            await loginUser(formData);
+        } catch (error) {
+            console.log("loginForm Error", error);
+            setErr(error);
+        }
     }
 
     /** Update local state w/curr state of input elem */
@@ -52,8 +58,9 @@ function LoginForm({ loginUser }) {
                 value={formData.password}
                 onChange={handleChange}
             />
-
             <button>Login</button>
+
+            {err && <b>{err[0]}</b>}
         </form>
     )
 }

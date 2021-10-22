@@ -16,16 +16,17 @@ function Routes({ loginUser, signupUser, editUser }) {
     console.log("Routes", { user })
 
     return (
-        <>{user &&
-            <Switch>
-                <Route exact path="/"><Homepage /></Route>
-                <Route exact path="/jobs"><JobList /></Route>
-                <Route exact path="/companies/:handle"><CompanyDetail /></Route>
-                <Route exact path="/companies"><CompanyList /></Route>
-                <Route exact path="/profile"><Profile editUser={editUser} /></Route>
-                <Redirect to="/" />
-            </Switch>
-        }
+        <>
+            {user &&
+                <Switch>
+                    <Route exact path="/"><Homepage /></Route>
+                    <Route exact path="/jobs"><JobList /></Route>
+                    <Route exact path="/companies/:handle"><CompanyDetail /></Route>
+                    <Route exact path="/companies"><CompanyList /></Route>
+                    <Route exact path="/profile"><Profile editUser={editUser} /></Route>
+                    <Redirect to="/" />
+                </Switch>
+            }
             {!user &&
                 <Switch>
                     <Route exact path="/"><Homepage /></Route>
