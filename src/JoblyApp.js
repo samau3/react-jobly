@@ -73,8 +73,7 @@ function JoblyApp() {
     if (err) {
         console.log("JoblyApp error", err);
     }
-
-    // could change to be a state - to see if currentUser is loaded
+    // Future TODO: utilize piece of state - to see if currentUser is loaded?
     // as is will be an issue for scalability 
     if (localStorage.getItem("token") && !user) {
         return <i>Loading...</i>

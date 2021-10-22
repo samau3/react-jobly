@@ -7,7 +7,7 @@ import UserContext from "./userContext";
  * - editUser (fn)
  * 
  * state:
- * - none
+ * - submitted
  * 
  * events:
  * - handleSubmit
@@ -23,7 +23,6 @@ function Profile({ editUser }) {
 
     const initialState = {
         username: username,
-        password: "",
         firstName: firstName,
         lastName: lastName,
         email: email
@@ -40,6 +39,7 @@ function Profile({ editUser }) {
             delete formData.username;
             await editUser(formData, username);
             setSubmitted(true);
+            setErr(null)
         } catch (error) {
             setErr(error);
         }
@@ -92,14 +92,6 @@ function Profile({ editUser }) {
                 onChange={handleChange}
             />
 
-            <label htmlFor="password">Confirm password to make changes:</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-            />
 
             <button>Save Changes</button>
             {err && <b>{err[0]}</b>}
@@ -107,5 +99,5 @@ function Profile({ editUser }) {
         </form>
     )
 }
-// const user = {username: "liz", password: "password", firstName: "liz", lastName: "ahler", email: "a@a.com"}
+
 export default Profile;
