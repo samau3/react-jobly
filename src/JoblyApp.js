@@ -25,15 +25,11 @@ function JoblyApp() {
     console.log("Jobly App", { token, user })
 
     useEffect(function changeUserState() {
-        // console.log("changeUserState", { token, user })
         if (token) {
             async function fetchUser() {
                 try {
-                    // console.log("fetchUser try", token.userData.username)
                     JoblyApi.token = token.token;
-                    // console.log("JoblyApi.token", JoblyApi.token)
                     const resp = await JoblyApi.getUser(token.userData.username);
-                    // console.log("fetchUser resp", { resp })
                     setUser(resp);
                 } catch (error) {
                     setErr(error);
@@ -43,10 +39,26 @@ function JoblyApp() {
         }
     }, [token])
 
+    useEffect(function getUserOnRefresh() {
+        if (localStorage.getItem("token")) {
+            async function fetchUser() {
+                try {
+                    const resp = await JoblyApi.getUser(localStorage.getItem("username"));
+                    setUser(resp);
+                } catch (error) {
+                    setErr(error);
+                }
+            }
+            fetchUser();
+        }
+    }, [])
+
     /** Login user via server authentication */
     // change from effect style; just make loginUser as async
     async function loginUser(userData) {
         const token = await JoblyApi.getToken(userData);
+        localStorage.setItem("token", token)
+        localStorage.setItem("username", userData.username)
         setToken({ token, userData });
     }
 
@@ -54,6 +66,8 @@ function JoblyApp() {
     // change from effect style; just make loginUser as async
     async function signupUser(userData) {
         const token = await JoblyApi.registerUser(userData);
+        localStorage.setItem("token", token)
+        localStorage.setItem("username", userData.username)
         setToken({ token, userData });
     }
 
@@ -66,6 +80,7 @@ function JoblyApp() {
     /** Logout user by clearing token and user states */
     function logout() {
         console.log("Logout User");
+        localStorage.clear();
         setToken(null);
         setUser(null);
     }

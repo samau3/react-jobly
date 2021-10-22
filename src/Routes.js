@@ -14,10 +14,11 @@ import UserContext from "./userContext";
 function Routes({ loginUser, signupUser, editUser }) {
     const user = useContext(UserContext);
     console.log("Routes", { user })
+    const token = localStorage.getItem('token')
 
     return (
         <>
-            {user &&
+            {token &&
                 <Switch>
                     <Route exact path="/"><Homepage /></Route>
                     <Route exact path="/jobs"><JobList /></Route>
@@ -27,7 +28,7 @@ function Routes({ loginUser, signupUser, editUser }) {
                     <Redirect to="/" />
                 </Switch>
             }
-            {!user &&
+            {!token &&
                 <Switch>
                     <Route exact path="/"><Homepage /></Route>
                     <Route exact path="/login"><LoginForm loginUser={loginUser} /></Route>
