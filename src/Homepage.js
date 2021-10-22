@@ -26,7 +26,7 @@ function Homepage() {
         <>
             <h1>Jobly </h1>
             <h3>All jobs in one place.</h3>
-            {token
+            {user
                 ? <h3>Welcome back {user.user.username}!</h3>
                 : <> <button><Link to="/signup">Signup</Link></button>
                     <button><Link to="/login">Log in</Link></button></>

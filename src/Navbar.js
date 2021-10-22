@@ -33,7 +33,7 @@ function Navbar({ logout }) {
     // }
     return (
         <>
-            {token &&
+            {user &&
                 <nav className="nav" >
                     <NavLink exact to="/">Jobly</NavLink>
                     <NavLink exact to="/companies">Companies</NavLink>
@@ -42,7 +42,7 @@ function Navbar({ logout }) {
                     <NavLink onClick={logout} exact to="/">Log Out {user.user.username}</NavLink>
                 </nav>
             }
-            {!token &&
+            {!user &&
                 <nav className="nav" >
                     <NavLink exact to="/">Jobly</NavLink>
                     <NavLink exact to="/signup">Signup</NavLink>

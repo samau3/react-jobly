@@ -19,7 +19,7 @@ import JoblyApi from "./api";
  * App -> JoblyApp -> {Navbar, Routes}
  */
 function JoblyApp() {
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState((localStorage.getItem("token") || null));
     const [user, setUser] = useState(null);
     const [err, setErr] = useState(null)
     console.log("Jobly App", { token, user })
@@ -31,6 +31,7 @@ function JoblyApp() {
                     JoblyApi.token = token.token;
                     const resp = await JoblyApi.getUser(token.userData.username);
                     setUser(resp);
+                    return <i>Loading...</i>
                 } catch (error) {
                     setErr(error);
                 }
@@ -39,26 +40,12 @@ function JoblyApp() {
         }
     }, [token])
 
-    useEffect(function getUserOnRefresh() {
-        if (localStorage.getItem("token")) {
-            async function fetchUser() {
-                try {
-                    const resp = await JoblyApi.getUser(localStorage.getItem("username"));
-                    setUser(resp);
-                } catch (error) {
-                    setErr(error);
-                }
-            }
-            fetchUser();
-        }
-    }, [])
 
     /** Login user via server authentication */
     // change from effect style; just make loginUser as async
     async function loginUser(userData) {
         const token = await JoblyApi.getToken(userData);
         localStorage.setItem("token", token)
-        localStorage.setItem("username", userData.username)
         setToken({ token, userData });
     }
 
@@ -67,7 +54,6 @@ function JoblyApp() {
     async function signupUser(userData) {
         const token = await JoblyApi.registerUser(userData);
         localStorage.setItem("token", token)
-        localStorage.setItem("username", userData.username)
         setToken({ token, userData });
     }
 
@@ -88,8 +74,6 @@ function JoblyApp() {
         console.log("JoblyApp error", err);
     }
 
-    // is there a way to flash messages? 
-    // maybe use a state that timesout or use bootstrap
     return (
         <div>
             <BrowserRouter>

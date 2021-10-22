@@ -18,7 +18,7 @@ function Routes({ loginUser, signupUser, editUser }) {
 
     return (
         <>
-            {token &&
+            {user &&
                 <Switch>
                     <Route exact path="/"><Homepage /></Route>
                     <Route exact path="/jobs"><JobList /></Route>
@@ -28,7 +28,7 @@ function Routes({ loginUser, signupUser, editUser }) {
                     <Redirect to="/" />
                 </Switch>
             }
-            {!token &&
+            {!user &&
                 <Switch>
                     <Route exact path="/"><Homepage /></Route>
                     <Route exact path="/login"><LoginForm loginUser={loginUser} /></Route>
